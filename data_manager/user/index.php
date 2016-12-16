@@ -257,14 +257,15 @@
 										<?php 
 										      $count++;
                                                }
-                                             }                                           
+                                             }    
+                                           pg_close($dbcon);                                       
 										 ?>
 
                                          
 									</tbody>
 								</table>
 							</div>	
-								<!-- PAGE CONTENT ENDS -->
+						<!-- PAGE CONTENT ENDS -->
 
 
 
