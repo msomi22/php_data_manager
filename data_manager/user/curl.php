@@ -1,7 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student fee balance portal</title>
+</head>
+<body>
+
+
+<style type="text/css">
+
+  body{
+    background-color: #84d2b5;
+  }
+  .content{
+    width: 400px;
+    height: 500px;
+    margin: 10px auto;
+    align-content: center;
+    border: solid 1px;
+    padding: 10px;
+    background-color: #085d7d;
+  }
+</style>
+
+
+<div class="content"> 
+  
+
+
+
 
 <?php
 
 $url = "http://localhost:8080/school-new/school/getStudentAPI";
+
+$admno = "";
+$admno = $_POST['admno']; //3388
 
 $body = "<?xml version='1.0'?>
         <soap:Envelope>
@@ -10,7 +43,7 @@ $body = "<?xml version='1.0'?>
               jabbss 
             </Username> 
             <admNo type='xsi:string'> 
-              3388 
+              ".$admno." 
             </admNo> 
           </soap:Body>
         </soap:Envelope>"; 
@@ -43,15 +76,44 @@ $data = curl_exec($ch);
 
 $foo = new SimpleXMLElement($data);
 $bar = json_decode(json_encode($foo));
+//print_r($bar);
 
-foreach($bar as $key=>$value) {
-  foreach($value as $key=>$value2) {
-   echo 'krey: '.$key. ', value:' .$value2 . '<br>';   
-  }
+$vars = get_object_vars ($bar); 
+foreach($vars as $key=>$value) {
+  //var_dump($key, $value); 
 }
 
 ?>
 
+<h1> Fee balance portal </h1>
 
 
+<form action="curltest3.php" method="POST"> 
+ <b> Admission number: </b>
+  <input type="text" name="admno">
+  <input type="submit" value="Submit"> 
+</form>
 
+
+<br><br><br>
+
+<?php
+
+foreach($bar as $key=>$value) {
+ // var_dump($value);
+  foreach($value as $key=>$value2) {
+   ?>
+     <h3> <?php  echo $key. '----:' .$value2 . '<br>'; ?> </h3>
+   <?php  
+  }
+}
+
+
+?>
+
+
+</div>
+
+
+</body>
+</html>
