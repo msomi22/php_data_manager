@@ -38,7 +38,18 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
 curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 
 $data = curl_exec($ch); 
-var_dump($data);
+//var_dump($data);
+//echo $data;
+
+$foo = new SimpleXMLElement($data);
+$bar = json_decode(json_encode($foo));
+
+foreach($bar as $key=>$value) {
+  foreach($value as $key=>$value2) {
+   echo 'krey: '.$key. ', value:' .$value2 . '<br>';   
+  }
+}
+
 ?>
 
 
